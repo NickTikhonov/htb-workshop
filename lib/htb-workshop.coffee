@@ -1,5 +1,6 @@
 {CompositeDisposable} = require 'atom'
 request = require "request"
+cheerio = require "cheerio"
 
 download = (url) ->
   return new Promise (resolve, reject) ->
@@ -8,6 +9,11 @@ download = (url) ->
         resolve body
       else
         reject message: "Unable to download the page."
+
+scrape = (body) ->
+  $ = cheerio.load(body)
+  return $('div.accepted-answer code').text()
+
 
 module.exports = HtbWorkshop =
   subscriptions: null
@@ -23,6 +29,6 @@ module.exports = HtbWorkshop =
     if editor = atom.workspace.getActiveTextEditor()
       url = editor.getSelectedText()
       download(url).then (body) ->
-        console.log body
+        console.log scrape body
       , (err) ->
         console.log err
