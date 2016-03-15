@@ -44,9 +44,11 @@ module.exports = HtbWorkshop =
       query = editor.getSelectedText()
       lang = editor.getGrammar().name
       getLink(query, lang).then (url) ->
+        atom.notifications.addSuccess "Searched google!"
         download(url).then (body) ->
-          console.log scrape body
+          atom.notifications.addSuccess "Downloaded SO page!"
+          editor.insertText scrape body
         , (err) ->
-          console.log err.message
+          atom.notifications.addWarning err.message
       , (err) ->
-        console.log err.message
+        atom.notifications.addWarning err.message
