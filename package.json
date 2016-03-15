@@ -2,13 +2,13 @@
   "name": "htb-workshop",
   "main": "./lib/htb-workshop",
   "version": "0.0.0",
-  "description": "A short description of your package",
+  "description": "Crowd sourced code snippet fetching tool.",
   "keywords": [
   ],
   "activationCommands": {
-    "atom-workspace": "htb-workshop:toggle"
+    "atom-workspace": "htb-workshop:fetch"
   },
-  "repository": "https://github.com/atom/htb-workshop",
+  "repository": "https://github.com/nicktikhonov/htb-workshop",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"

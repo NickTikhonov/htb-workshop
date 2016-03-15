@@ -3,7 +3,7 @@
   'atom-text-editor': [
     {
       'label': 'Toggle htb-workshop'
-      'command': 'htb-workshop:toggle'
+      'command': 'htb-workshop:fetch'
     }
   ]
 'menu': [
@@ -14,7 +14,7 @@
       'submenu': [
         {
           'label': 'Toggle'
-          'command': 'htb-workshop:toggle'
+          'command': 'htb-workshop:fetch'
         }
       ]
     ]
