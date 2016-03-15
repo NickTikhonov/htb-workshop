@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "request": "*",
-    "cheerio": "*"
+    "cheerio": "*",
+    "google": "*"
   }
 }

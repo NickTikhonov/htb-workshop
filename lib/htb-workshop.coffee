@@ -1,6 +1,20 @@
 {CompositeDisposable} = require 'atom'
 request = require "request"
 cheerio = require "cheerio"
+google = require "google"
+
+getLink = (query, lang) ->
+  return new Promise (resolve, reject) ->
+    google.resultsPerPage = 1
+    google "#{query} in #{lang} site:stackoverflow.com", (err, res) ->
+      if err
+        reject message: "Error googling"
+      else
+        if res.links.length == 0
+          reject message: "No results were found"
+        else
+          console.log res.links[0]
+          resolve res.links[0].link
 
 download = (url) ->
   return new Promise (resolve, reject) ->
@@ -27,8 +41,12 @@ module.exports = HtbWorkshop =
 
   fetch: ->
     if editor = atom.workspace.getActiveTextEditor()
-      url = editor.getSelectedText()
-      download(url).then (body) ->
-        console.log scrape body
+      query = editor.getSelectedText()
+      lang = editor.getGrammar().name
+      getLink(query, lang).then (url) ->
+        download(url).then (body) ->
+          console.log scrape body
+        , (err) ->
+          console.log err.message
       , (err) ->
-        console.log err
+        console.log err.message
